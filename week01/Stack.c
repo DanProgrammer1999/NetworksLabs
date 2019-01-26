@@ -80,19 +80,3 @@ void display()
     }
     printf("\n");
 }
-
-int main()
-{
-    create();
-    for (int i = 0; i < 15; i++)
-    {
-        push(i);
-    }
-    display();
-    while (!empty())
-    {
-        printf("%d\n", pop());
-    }
-    printf("%d\n", pop());
-    display();
-}
