@@ -205,9 +205,6 @@ void client()
 
     char input[32];
     scanf("%s", input);
-    printf(ANSI_COLOR_GREEN "Received input: " ANSI_COLOR_RESET);
-    printf("%s\n", input);
-
     write(pipe_fd[1], input, strlen(input));
     kill(server_id, SIGUSR1);
 }
@@ -217,7 +214,7 @@ void server()
     char *input = malloc(32);
 
     read(pipe_fd[0], input, 32);
-    printf(ANSI_COLOR_MAGENTA "Input from the pipe: " ANSI_COLOR_RESET);
+    printf(ANSI_COLOR_MAGENTA "Server received: " ANSI_COLOR_RESET);
     printf("%s\n" ANSI_COLOR_MAGENTA, input);
 
     process(input);
