@@ -3,27 +3,43 @@
 #include <string.h>
 #include "stack.h"
 
-#define INIT_SIZE 10
+#define INIT_SIZE 20
 
 static int *stack;
 int head;
 int arr_size;
+int init = 0;
 
 void create()
 {
+    init = 1;
     stack = malloc(sizeof(int) * INIT_SIZE);
     head = -1;
     arr_size = INIT_SIZE;
 }
 
+int initialized()
+{
+    return init;
+}
+
 int empty()
 {
+    if (!initialized())
+    {
+        return EOF;
+    }
     return head < 0;
 }
 
 void stack_size()
 {
-    printf("Stack size is %i.\n", head + 1);
+    if (!initialized())
+    {
+        return;
+    }
+
+    printf("Stack size is %i\n", head + 1);
 }
 
 void grow()
@@ -34,12 +50,17 @@ void grow()
     {
         new_stack[i] = stack[i];
     }
+    free(stack);
     stack = new_stack;
     arr_size = new_size;
 }
 
 int peek()
 {
+    if (!initialized())
+    {
+        return EOF;
+    }
     if (!empty())
     {
         return stack[head];
@@ -53,6 +74,10 @@ int peek()
 
 void push(int data)
 {
+    if (!initialized())
+    {
+        return;
+    }
     if (head + 2 >= arr_size)
     {
         grow();
@@ -64,6 +89,11 @@ void push(int data)
 
 int pop()
 {
+    if (!initialized())
+    {
+        return EOF;
+    }
+
     if (empty())
     {
         perror("Fatal error: cannot pop on empty stack.\n");
@@ -75,6 +105,11 @@ int pop()
 
 void display()
 {
+    if (!initialized())
+    {
+        return;
+    }
+
     for (int i = 0; i < head + 1; i++)
     {
         printf("%d ", stack[i]);

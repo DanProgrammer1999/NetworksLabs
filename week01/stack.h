@@ -8,5 +8,6 @@ int peek();
 void push(int data);
 int pop();
 void display();
+int initialized();
 
 #endif
