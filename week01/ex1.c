@@ -205,8 +205,7 @@ void client()
 
     char input[32];
     scanf("%s", input);
-    getchar();
-    printf(ANSI_COLOR_GREEN "\nReceived input: " ANSI_COLOR_RESET);
+    printf(ANSI_COLOR_GREEN "Received input: " ANSI_COLOR_RESET);
     printf("%s\n", input);
 
     write(pipe_fd[1], input, strlen(input));
